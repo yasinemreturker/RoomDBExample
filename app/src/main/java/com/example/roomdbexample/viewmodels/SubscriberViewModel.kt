@@ -52,11 +52,9 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
     }
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-        TODO("Not yet implemented")
     }
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-        TODO("Not yet implemented")
     }
 
 
