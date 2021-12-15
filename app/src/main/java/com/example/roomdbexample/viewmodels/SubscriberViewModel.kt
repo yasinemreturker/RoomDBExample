@@ -1,5 +1,6 @@
-package com.example.roomdbexample
+package com.example.roomdbexample.viewmodels
 
+import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,10 +12,10 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
 
     val subscribers = repository.subscribers
 
-    private val inputName = MutableLiveData<String>()
-    private val inputEmail = MutableLiveData<String>()
-    private val saveOrUpdateButtonText = MutableLiveData<String>()
-    private val clearAllOrDeleteButtonText = MutableLiveData<String>()
+    val inputName = MutableLiveData<String>()
+    val inputEmail = MutableLiveData<String>()
+    val saveOrUpdateButtonText = MutableLiveData<String>()
+    val clearAllOrDeleteButtonText = MutableLiveData<String>()
 
     init {
         saveOrUpdateButtonText.value = "Save"
