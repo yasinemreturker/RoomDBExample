@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.roomdbexample.Event
-import com.example.roomdbexample.db.Subscriber
-import com.example.roomdbexample.db.SubscriberRepository
+import com.example.roomdbexample.data.utils.Event
+import com.example.roomdbexample.data.models.database.Subscriber
+import com.example.roomdbexample.data.db.repositories.SubscriberRepository
 import kotlinx.coroutines.launch
 
 class SubscriberViewModel(private val repository: SubscriberRepository) : ViewModel(), Observable {
@@ -90,6 +90,7 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
     fun clearAll()=viewModelScope.launch {
         repository.deleteAll()
         statusMessage.value = Event("All Subscribers Deleted Successfully")
+
     }
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {

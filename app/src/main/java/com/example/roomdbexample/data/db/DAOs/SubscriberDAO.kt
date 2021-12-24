@@ -1,7 +1,8 @@
-package com.example.roomdbexample.db
+package com.example.roomdbexample.data.db.DAOs
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.roomdbexample.data.models.database.Subscriber
 
 @Dao
 interface SubscriberDAO {

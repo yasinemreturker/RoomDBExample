@@ -1,4 +1,4 @@
-package com.example.roomdbexample
+package com.example.roomdbexample.data.utils
 
 open class Event<out T>(private val content: T) {
 

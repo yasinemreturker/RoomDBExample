@@ -1,4 +1,4 @@
-package com.example.roomdbexample.adapters
+package com.example.roomdbexample.view.adapters
 
 
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomdbexample.R
 import com.example.roomdbexample.databinding.ListItemBinding
-import com.example.roomdbexample.db.Subscriber
+import com.example.roomdbexample.data.models.database.Subscriber
 
 class MyRecyclerViewAdapter(
     private val subscribersList: List<Subscriber>,

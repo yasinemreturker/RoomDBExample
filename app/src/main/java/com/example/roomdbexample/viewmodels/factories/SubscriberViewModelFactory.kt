@@ -1,8 +1,8 @@
-package com.example.roomdbexample.factories
+package com.example.roomdbexample.viewmodels.factories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.roomdbexample.db.SubscriberRepository
+import com.example.roomdbexample.data.db.repositories.SubscriberRepository
 import com.example.roomdbexample.viewmodels.SubscriberViewModel
 import java.lang.IllegalArgumentException
 

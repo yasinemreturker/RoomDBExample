@@ -1,4 +1,7 @@
-package com.example.roomdbexample.db
+package com.example.roomdbexample.data.db.repositories
+
+import com.example.roomdbexample.data.db.DAOs.SubscriberDAO
+import com.example.roomdbexample.data.models.database.Subscriber
 
 class SubscriberRepository(private val dao: SubscriberDAO) {
 

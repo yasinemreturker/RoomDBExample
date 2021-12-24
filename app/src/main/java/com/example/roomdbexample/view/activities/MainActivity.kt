@@ -1,4 +1,4 @@
-package com.example.roomdbexample.activities
+package com.example.roomdbexample.view.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,12 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.roomdbexample.R
-import com.example.roomdbexample.factories.SubscriberViewModelFactory
-import com.example.roomdbexample.adapters.MyRecyclerViewAdapter
+import com.example.roomdbexample.viewmodels.factories.SubscriberViewModelFactory
+import com.example.roomdbexample.view.adapters.MyRecyclerViewAdapter
 import com.example.roomdbexample.databinding.ActivityMainBinding
-import com.example.roomdbexample.db.Subscriber
-import com.example.roomdbexample.db.SubscriberDatabase
-import com.example.roomdbexample.db.SubscriberRepository
+import com.example.roomdbexample.data.models.database.Subscriber
+import com.example.roomdbexample.data.db.SubscriberDatabase
+import com.example.roomdbexample.data.db.repositories.SubscriberRepository
 import com.example.roomdbexample.viewmodels.SubscriberViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
     private fun displaySubscribersList(){
         subscriberViewModel.subscribers.observe(this, Observer {
             Log.i("MYTAG",it.toString())
-            binding.subscriberRecyclerView.adapter = MyRecyclerViewAdapter(it,{selectedItem:Subscriber->listItemClicked(selectedItem)})
+            binding.subscriberRecyclerView.adapter = MyRecyclerViewAdapter(it,{selectedItem: Subscriber ->listItemClicked(selectedItem)})
         })
     }
 
