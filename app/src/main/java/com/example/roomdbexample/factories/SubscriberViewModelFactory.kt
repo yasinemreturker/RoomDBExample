@@ -1,4 +1,4 @@
-package com.example.roomdbexample
+package com.example.roomdbexample.factories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

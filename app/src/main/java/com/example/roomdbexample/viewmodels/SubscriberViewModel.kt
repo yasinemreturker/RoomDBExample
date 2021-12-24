@@ -1,9 +1,11 @@
 package com.example.roomdbexample.viewmodels
 
 import androidx.databinding.Observable
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.roomdbexample.Event
 import com.example.roomdbexample.db.Subscriber
 import com.example.roomdbexample.db.SubscriberRepository
 import kotlinx.coroutines.launch
@@ -19,6 +21,10 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
 
     private var isUpdateOrDelete = false
     private lateinit var subscriberToUpdateOrDelete : Subscriber
+
+    private val statusMessage = MutableLiveData<Event<String>>()
+    val message : LiveData<Event<String>>
+        get() = statusMessage
 
     init {
         saveOrUpdateButtonText.value = "Save"
@@ -58,6 +64,7 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
 
     fun insert(subscriber: Subscriber)= viewModelScope.launch {
         repository.insert(subscriber)
+        statusMessage.value = Event("Subscriber Inserted Successfully")
     }
 
     fun update(subscriber: Subscriber) = viewModelScope.launch {
@@ -67,6 +74,7 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
         isUpdateOrDelete = false
         saveOrUpdateButtonText.value = "Save"
         clearAllOrDeleteButtonText.value = "Clear All"
+        statusMessage.value = Event("Subscriber Updated Successfully")
     }
 
     fun delete(subscriber: Subscriber) = viewModelScope.launch {
@@ -76,11 +84,12 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
         isUpdateOrDelete = false
         saveOrUpdateButtonText.value = "Save"
         clearAllOrDeleteButtonText.value = "Clear All"
-
+        statusMessage.value = Event("Subscriber Deleted Successfully")
     }
 
     fun clearAll()=viewModelScope.launch {
         repository.deleteAll()
+        statusMessage.value = Event("All Subscribers Deleted Successfully")
     }
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {

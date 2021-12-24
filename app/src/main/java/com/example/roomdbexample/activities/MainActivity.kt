@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.roomdbexample.R
-import com.example.roomdbexample.SubscriberViewModelFactory
+import com.example.roomdbexample.factories.SubscriberViewModelFactory
 import com.example.roomdbexample.adapters.MyRecyclerViewAdapter
 import com.example.roomdbexample.databinding.ActivityMainBinding
 import com.example.roomdbexample.db.Subscriber
@@ -33,6 +33,12 @@ class MainActivity : AppCompatActivity() {
         binding.myViewModel = subscriberViewModel
         binding.lifecycleOwner = this
         initRecyclerView()
+
+        subscriberViewModel.message.observe(this, Observer {
+            it.getContentIfNotHandled()?.let {
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     private fun initRecyclerView(){
@@ -48,7 +54,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun listItemClicked(subscriber: Subscriber){
-        Toast.makeText(this,"selected name is ${subscriber.name}", Toast.LENGTH_LONG).show()
+        // Old way is below that for toast message. New version that, display Toast Message with view-model and live data using with Events.
+        //Toast.makeText(this,"selected name is ${subscriber.name}", Toast.LENGTH_LONG).show()
         subscriberViewModel.initUpdateAndDelete(subscriber)
     }
 
