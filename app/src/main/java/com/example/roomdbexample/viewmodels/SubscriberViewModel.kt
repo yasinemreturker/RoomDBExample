@@ -63,34 +63,50 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
     }
 
     fun insert(subscriber: Subscriber)= viewModelScope.launch {
-        repository.insert(subscriber)
-        statusMessage.value = Event("Subscriber Inserted Successfully")
+        val newRowId = repository.insert(subscriber)
+        if(newRowId>-1) {
+            statusMessage.value = Event("Subscriber Inserted Successfully $newRowId")
+        }else{
+            statusMessage.value = Event("Error Occurred")
+        }
     }
 
-    fun update(subscriber: Subscriber) = viewModelScope.launch {
-        repository.update(subscriber)
-        inputName.value = null
-        inputEmail.value = null
-        isUpdateOrDelete = false
-        saveOrUpdateButtonText.value = "Save"
-        clearAllOrDeleteButtonText.value = "Clear All"
-        statusMessage.value = Event("Subscriber Updated Successfully")
+    private fun update(subscriber: Subscriber) = viewModelScope.launch {
+        val noOfRows = repository.update(subscriber)
+        if(noOfRows>0) {
+            inputName.value = null
+            inputEmail.value = null
+            isUpdateOrDelete = false
+            saveOrUpdateButtonText.value = "Save"
+            clearAllOrDeleteButtonText.value = "Clear All"
+            statusMessage.value = Event("$noOfRows Row Updated Successfully")
+        }else{
+            statusMessage.value = Event("Error Occurred")
+        }
     }
 
-    fun delete(subscriber: Subscriber) = viewModelScope.launch {
-        repository.delete(subscriber)
-        inputName.value = null
-        inputEmail.value = null
-        isUpdateOrDelete = false
-        saveOrUpdateButtonText.value = "Save"
-        clearAllOrDeleteButtonText.value = "Clear All"
-        statusMessage.value = Event("Subscriber Deleted Successfully")
+    private fun delete(subscriber: Subscriber) = viewModelScope.launch {
+        val noOfRowsDeleted = repository.delete(subscriber)
+
+        if(noOfRowsDeleted>0){
+            inputName.value = null
+            inputEmail.value = null
+            isUpdateOrDelete = false
+            saveOrUpdateButtonText.value = "Save"
+            clearAllOrDeleteButtonText.value = "Clear All"
+            statusMessage.value = Event("$noOfRowsDeleted Row Deleted Successfully")
+        }else{
+            statusMessage.value = Event("Error Occurred")
+        }
     }
 
-    fun clearAll()=viewModelScope.launch {
-        repository.deleteAll()
-        statusMessage.value = Event("All Subscribers Deleted Successfully")
-
+    private fun clearAll()=viewModelScope.launch {
+        val noOfRowsDeleted = repository.deleteAll()
+        if(noOfRowsDeleted>0) {
+            statusMessage.value = Event("$noOfRowsDeleted Subscribers Deleted Successfully")
+        }else{
+            statusMessage.value = Event("Error Occurred")
+        }
     }
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
